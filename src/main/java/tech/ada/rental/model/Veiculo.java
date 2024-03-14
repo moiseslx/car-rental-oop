@@ -57,7 +57,7 @@ public class Veiculo extends IdBasedModel{
         this.modelo = modelo;
     }
 
-        public void setMarca(String marca) {
+    public void setMarca(String marca) {
         this.marca = marca;
     }
 

@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 
 public interface CalculosVeiculo {
 
-    public BigDecimal calculoAluguel(Veiculo veiculo);
-    public BigDecimal definirDiaria(Veiculo veiculo);
+    public BigDecimal calcularAluguel(Veiculo veiculo);
+    public BigDecimal definirValorDiaria(Veiculo veiculo);
 }
