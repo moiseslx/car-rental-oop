@@ -2,20 +2,26 @@ package tech.ada.rental;
 
 import tech.ada.rental.enums.TipoCliente;
 import tech.ada.rental.model.Cliente;
-import tech.ada.rental.repository.ClienteRepository;
 import tech.ada.rental.repository.impl.ClienteRepositoryImpl;
+import tech.ada.rental.service.ClienteService;
 
 public class Main {
     public static void main(String[] args) {
-        Cliente cliente = new Cliente("Moises", "moises@moises.com", "00000000000", "0000000000", "000000000", TipoCliente.PESSOA_FISICA);
-        ClienteRepository repository = new ClienteRepositoryImpl();
+        ClienteService service = new ClienteService(new ClienteRepositoryImpl());
+        System.out.println(service.criar(new Cliente(
+                "Moises Almeida",
+                "moises@me.com",
+                "11 99999-9999",
+                "11111111111",
+                "11111111111",
+                TipoCliente.PESSOA_FISICA)));
 
-        System.out.println(cliente);
-        System.out.println(repository.save(cliente));
-        System.out.println(repository.findById(0L));
-        repository.deleteById(0L);
-        System.out.println(repository.findAll());
-
-        System.out.println();
+        System.out.println(service.criar(new Cliente(
+                "Moises Almeida",
+                "moises@me.com",
+                "11 99999-9999",
+                "11111111111",
+                "11111111111",
+                TipoCliente.PESSOA_FISICA)));
     }
 }
