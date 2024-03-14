@@ -15,5 +15,7 @@ public class Main {
         System.out.println(repository.findById(0L));
         repository.deleteById(0L);
         System.out.println(repository.findAll());
+
+        System.out.println();
     }
 }
