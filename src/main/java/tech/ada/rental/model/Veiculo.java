@@ -57,7 +57,7 @@ public class Veiculo extends IdBasedModel{
         this.modelo = modelo;
     }
 
-    public void setMarca(String marca) {
+        public void setMarca(String marca) {
         this.marca = marca;
     }
 
@@ -65,7 +65,19 @@ public class Veiculo extends IdBasedModel{
         this.disponibilidade = disponibilidade;
     }
 
-    private void setValorDiaria(BigDecimal valorDiaria) {
+    public void setValorDiaria(BigDecimal valorDiaria) {
         this.valorDiaria = valorDiaria;
+    }
+
+    @Override
+    public String toString() {
+        return "Veiculo{" +
+                "tipoVeiculo=" + tipoVeiculo +
+                ", placa='" + placa + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", marca='" + marca + '\'' +
+                ", disponibilidade=" + disponibilidade +
+                ", valorDiaria=" + valorDiaria +
+                '}';
     }
 }

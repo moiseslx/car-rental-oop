@@ -13,9 +13,13 @@ public class ClienteService {
 
     public Cliente criar(Cliente cliente) {
         if (repository.findByDocumento(cliente.getDocumento()) != null) {
+            // TODO: Implementar tratamento de erros
             throw new RuntimeException("Ja existe um cliente com o documento informado");
         }
 
+        return repository.save(cliente);
+    }
+    public Cliente atualizar(Cliente cliente) {
         return repository.save(cliente);
     }
 }
