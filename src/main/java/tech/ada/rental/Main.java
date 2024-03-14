@@ -33,6 +33,7 @@ public class Main {
         System.out.println(veiculoService.criar(new Veiculo(TipoVeiculo.MEDIO, "AAA-1111", "Gol", "Volkswagen")));
         veiculoService.criar(new Veiculo(TipoVeiculo.SUV, "AAA-2222", "Golf", "Volkswagen"));
         veiculoService.criar(new Veiculo(TipoVeiculo.PEQUENO, "AAA-3333", "Fusca", "Volkswagen"));
-        veiculoService.criar(new Veiculo(TipoVeiculo.MEDIO, "AAA-1111", "HB20", "Hyundai"));
+
+        System.out.println(veiculoService.buscarPorNome("Gol"));
     }
 }

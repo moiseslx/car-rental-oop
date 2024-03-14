@@ -14,15 +14,22 @@ public class VeiculoService {
 
     public Veiculo criar(Veiculo veiculo) {
         if (repository.findByPlaca(veiculo.getPlaca()) != null) {
+            // TODO: Implementar tratamento de erros
             throw new RuntimeException("Ja existe um veículo com a placa informada no sistema");
         }
-
+        veiculo.setValorDiaria(veiculo.getTipoVeiculo().definirDiaria(veiculo));
         return repository.save(veiculo);
     }
-
-    public List<Veiculo> buscarPorNome(String nome){
-        return repository.findByPartialName(nome);
+    public List<Veiculo> buscarPorNome(String nomeparcial){
+        return repository.findByPartialName(nomeparcial);
     }
-
-
+    public Veiculo buscarPorPlaca(String placa){
+        return repository.findByPlaca(placa);
+    }
+    public Veiculo atualizar(Veiculo veiculo) {
+        return repository.save(veiculo);
+    }
+    public void deletar(Long id) {
+        repository.deleteById(id);
+    }
 }

@@ -4,11 +4,13 @@ import tech.ada.rental.model.Veiculo;
 import tech.ada.rental.repository.VeiculoRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VeiculoRepositoryImpl extends InMemoryRepository<Veiculo> implements VeiculoRepository {
     @Override
     public List<Veiculo> findByPartialName(String marca) {
-        return objetos.stream().filter(o -> o.getMarca().contains(marca)).toList();
+        return objetos
+                .stream().filter(o -> o.getModelo().contains(marca)).collect(Collectors.toList());
     }
 
     @Override

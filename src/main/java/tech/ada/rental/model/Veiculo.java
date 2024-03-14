@@ -65,7 +65,7 @@ public class Veiculo extends IdBasedModel{
         this.disponibilidade = disponibilidade;
     }
 
-    private void setValorDiaria(BigDecimal valorDiaria) {
+    public void setValorDiaria(BigDecimal valorDiaria) {
         this.valorDiaria = valorDiaria;
     }
 
