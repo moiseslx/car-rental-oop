@@ -27,7 +27,7 @@ public abstract class InMemoryRepository<T extends IdBasedModel> implements Repo
         }
         @Override
         public T save(T o) {
-            if (o.getId() != null) {
+            if (o.getId() == null) {
                 o.setId(idContador);
                 idContador = idContador + 1;
                 objetos.add(o);
