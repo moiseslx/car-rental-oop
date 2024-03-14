@@ -70,4 +70,15 @@ public class Cliente  extends  IdBasedModel {
         this.tipo = tipo;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", documento='" + documento + '\'' +
+                ", cnh='" + cnh + '\'' +
+                ", tipo=" + tipo +
+                '}';
+    }
 }
