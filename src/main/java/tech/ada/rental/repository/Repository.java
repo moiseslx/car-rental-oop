@@ -6,4 +6,5 @@ public interface Repository <T>{
     T findById(Long id);
     void deleteById(Long id);
     Iterable<T> findAll();
+
 }

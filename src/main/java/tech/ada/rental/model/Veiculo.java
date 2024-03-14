@@ -4,9 +4,8 @@ import tech.ada.rental.enums.TipoVeiculo;
 
 import java.math.BigDecimal;
 
-public class Veiculo {
+public class Veiculo extends IdBasedModel{
 
-    private Long id;
     private TipoVeiculo tipoVeiculo;
     private String placa;
     private String modelo;
@@ -20,10 +19,6 @@ public class Veiculo {
         this.modelo = modelo;
         this.marca = marca;
         this.disponibilidade = true;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public TipoVeiculo getTipoVeiculo() {
@@ -48,10 +43,6 @@ public class Veiculo {
 
     public BigDecimal getValorDiaria() {
         return valorDiaria;
-    }
-
-    private void setId(Long id) {
-        this.id = id;
     }
 
     public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {

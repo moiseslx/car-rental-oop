@@ -3,9 +3,8 @@ package tech.ada.rental.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Aluguel {
+public class Aluguel extends IdBasedModel {
 
-    private Long id;
     private Cliente cliente;
     private Veiculo veiculo;
     private BigDecimal precoAluguel;
@@ -16,14 +15,6 @@ public class Aluguel {
         this.cliente = cliente;
         this.veiculo = veiculo;
         this.inicioAluguel = inicioAluguel;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    private void setId(Long id) {
-        this.id = id;
     }
 
     public Cliente getCliente() {
@@ -65,4 +56,6 @@ public class Aluguel {
     public void setDevolucao(LocalDateTime devolucao) {
         this.devolucao = devolucao;
     }
+
+
 }

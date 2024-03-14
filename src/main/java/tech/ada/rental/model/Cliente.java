@@ -4,9 +4,8 @@ import tech.ada.rental.enums.TipoCliente;
 
 import java.util.Objects;
 
-public class Cliente {
+public class Cliente  extends  IdBasedModel {
 
-    private Long id;
     private String nome;
     private String email;
     private String telefone;
@@ -21,10 +20,6 @@ public class Cliente {
         this.documento = documento;
         this.cnh = cnh;
         this.tipo = tipo;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getNome() {
@@ -75,16 +70,4 @@ public class Cliente {
         this.tipo = tipo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) && Objects.equals(nome, cliente.nome) && Objects.equals(email, cliente.email) && Objects.equals(telefone, cliente.telefone) && Objects.equals(documento, cliente.documento) && Objects.equals(cnh, cliente.cnh);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, email, telefone, documento, cnh);
-    }
 }
