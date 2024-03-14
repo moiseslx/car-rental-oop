@@ -1,10 +1,8 @@
-package tech.ada.rental.service;
+package tech.ada.rental.service.api;
 
 import tech.ada.rental.model.Veiculo;
 import java.math.BigDecimal;
 
-public interface CalculosVeiculo {
-
-    public BigDecimal calcularAluguel(Veiculo veiculo);
+public interface DiariaVeiculo {
     public BigDecimal definirValorDiaria(Veiculo veiculo);
 }

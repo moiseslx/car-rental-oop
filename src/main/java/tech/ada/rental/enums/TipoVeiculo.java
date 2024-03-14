@@ -1,17 +1,12 @@
 package tech.ada.rental.enums;
 
 import tech.ada.rental.model.Veiculo;
-import tech.ada.rental.service.CalculosVeiculo;
+import tech.ada.rental.service.api.DiariaVeiculo;
 import java.math.BigDecimal;
 
-public enum TipoVeiculo implements CalculosVeiculo {
+public enum TipoVeiculo implements DiariaVeiculo {
 
     PEQUENO {
-        @Override
-        public BigDecimal calcularAluguel(Veiculo veiculo) {
-            return null;
-        }
-
         @Override
         public BigDecimal definirValorDiaria(Veiculo veiculo) {
             return new BigDecimal("100.00");
@@ -19,21 +14,11 @@ public enum TipoVeiculo implements CalculosVeiculo {
     },
     MEDIO {
         @Override
-        public BigDecimal calcularAluguel(Veiculo veiculo) {
-            return null;
-        }
-
-        @Override
         public BigDecimal definirValorDiaria(Veiculo veiculo) {
             return new BigDecimal("150.00");
         }
     },
     SUV {
-        @Override
-        public BigDecimal calcularAluguel(Veiculo veiculo) {
-            return null;
-        }
-
         @Override
         public BigDecimal definirValorDiaria(Veiculo veiculo) {
             return new BigDecimal("200.00");

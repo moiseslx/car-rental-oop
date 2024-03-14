@@ -11,6 +11,7 @@ public class Aluguel extends IdBasedModel {
     private BigDecimal precoAluguel;
     private LocalDateTime inicioAluguel;
     private LocalDateTime devolucao;
+    private Long diarias;
 
     public Aluguel(Cliente cliente, Veiculo veiculo, LocalDateTime inicioAluguel) {
         this.cliente = cliente;
@@ -59,6 +60,13 @@ public class Aluguel extends IdBasedModel {
         this.devolucao = devolucao;
     }
 
+    public Long getDiarias() {
+        return diarias;
+    }
+
+    public void setDiarias(Long diarias) {
+        this.diarias = diarias;
+    }
 
     @Override
     public String toString() {
