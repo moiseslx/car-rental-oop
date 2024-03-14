@@ -8,34 +8,34 @@ public enum TipoVeiculo implements CalculosVeiculo {
 
     PEQUENO {
         @Override
-        public BigDecimal calculoAluguel(Veiculo veiculo) {
+        public BigDecimal calcularAluguel(Veiculo veiculo) {
             return null;
         }
 
         @Override
-        public BigDecimal definirDiaria(Veiculo veiculo) {
+        public BigDecimal definirValorDiaria(Veiculo veiculo) {
             return new BigDecimal("100.00");
         }
     },
     MEDIO {
         @Override
-        public BigDecimal calculoAluguel(Veiculo veiculo) {
+        public BigDecimal calcularAluguel(Veiculo veiculo) {
             return null;
         }
 
         @Override
-        public BigDecimal definirDiaria(Veiculo veiculo) {
+        public BigDecimal definirValorDiaria(Veiculo veiculo) {
             return new BigDecimal("150.00");
         }
     },
     SUV {
         @Override
-        public BigDecimal calculoAluguel(Veiculo veiculo) {
+        public BigDecimal calcularAluguel(Veiculo veiculo) {
             return null;
         }
 
         @Override
-        public BigDecimal definirDiaria(Veiculo veiculo) {
+        public BigDecimal definirValorDiaria(Veiculo veiculo) {
             return new BigDecimal("200.00");
         }
     };

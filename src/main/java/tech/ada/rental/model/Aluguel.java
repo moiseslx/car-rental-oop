@@ -2,6 +2,7 @@ package tech.ada.rental.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Aluguel extends IdBasedModel {
 
@@ -41,6 +42,7 @@ public class Aluguel extends IdBasedModel {
         this.precoAluguel = precoAluguel;
     }
 
+
     public LocalDateTime getInicioAluguel() {
         return inicioAluguel;
     }
@@ -58,4 +60,14 @@ public class Aluguel extends IdBasedModel {
     }
 
 
+    @Override
+    public String toString() {
+        return "Aluguel{" +
+                "cliente=" + cliente.getNome() +
+                ", veiculo=" + veiculo.getModelo() + "|" + veiculo.isDisponibilidade() +
+                ", precoAluguel=" + precoAluguel +
+                ", inicioAluguel=" + inicioAluguel.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) +
+                ", devolucao=" + devolucao +
+                '}';
+    }
 }
