@@ -13,7 +13,7 @@ public abstract class InMemoryRepository<T extends IdBasedModel> implements Repo
 
         @Override
         public T findById(Long id) {
-            return objetos.stream().filter(o -> o.getId().equals(id)).findFirst().get();
+            return objetos.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);
         }
 
         @Override

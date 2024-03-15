@@ -1,8 +1,9 @@
 package tech.ada.rental.service;
 
-import org.jetbrains.annotations.NotNull;
 import tech.ada.rental.model.Cliente;
 import tech.ada.rental.repository.ClienteRepository;
+import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
+import tech.ada.rental.service.exception.ElementosDuplicadosException;
 
 public class ClienteService {
 
@@ -12,23 +13,30 @@ public class ClienteService {
         this.repository = repository;
     }
 
-    public Cliente criar(@NotNull Cliente cliente) {
-        if (repository.findByDocumento(cliente.getDocumento()) != null) {
-            // TODO: Implementar tratamento de erros
-            throw new RuntimeException("Ja existe um cliente com o documento informado");
+    public Cliente criar(Cliente cliente) throws ElementosDuplicadosException{
+        if (repository.findByDocumento(cliente.getDocumento()) == null) {
+            return repository.save(cliente);
         }
 
-        return repository.save(cliente);
+        throw new ElementosDuplicadosException("Ja existe um cliente com esse documento");
     }
     public Cliente atualizar(Cliente cliente) {
         return repository.save(cliente);
     }
 
-    public void deletar(Long id) {
-        repository.deleteById(id);
+    public void deletar(Long id) throws ElementoNaoEncotradoException {
+        if (repository.findById(id) != null) {
+            repository.deleteById(id);
+        }
+
+        throw new ElementoNaoEncotradoException("Cliente nao foi encontrado");
     }
 
-    public Cliente buscarPorId(Long id) {
-        return repository.findById(id);
+    public Cliente buscarPorId(Long id) throws ElementoNaoEncotradoException{
+        if (repository.findById(id) != null) {
+            return repository.findById(id);
+        }
+
+        throw new ElementoNaoEncotradoException("Cliente nao foi encontrado");
     }
 }
