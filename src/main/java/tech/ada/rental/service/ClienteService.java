@@ -2,10 +2,11 @@ package tech.ada.rental.service;
 
 import tech.ada.rental.model.Cliente;
 import tech.ada.rental.repository.ClienteRepository;
+import tech.ada.rental.service.api.Service;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.ElementosDuplicadosException;
 
-public class ClienteService {
+public class ClienteService implements Service<Cliente> {
 
     ClienteRepository repository;
 
@@ -13,7 +14,7 @@ public class ClienteService {
         this.repository = repository;
     }
 
-    public Cliente criar(Cliente cliente) throws ElementosDuplicadosException{
+    public Cliente criar(Cliente cliente) throws ElementosDuplicadosException {
         if (repository.findByDocumento(cliente.getDocumento()) == null) {
             return repository.save(cliente);
         }
@@ -38,5 +39,10 @@ public class ClienteService {
         }
 
         throw new ElementoNaoEncotradoException("Cliente nao foi encontrado");
+    }
+
+    @Override
+    public Iterable<Cliente> buscarTodos() {
+        return repository.findAll();
     }
 }
