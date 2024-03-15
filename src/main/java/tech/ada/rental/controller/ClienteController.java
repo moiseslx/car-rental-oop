@@ -5,6 +5,7 @@ import tech.ada.rental.dto.ClienteDTO;
 import tech.ada.rental.enums.RequestStatus;
 import tech.ada.rental.model.Cliente;
 import tech.ada.rental.service.ClienteService;
+import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.ElementosDuplicadosException;
 import tech.ada.rental.controller.validators.UserEntryValidator;
 
@@ -47,4 +48,39 @@ public class ClienteController {
             return response;
         }
     }
+
+    public ResponseEntity<Iterable<Cliente>> buscarTodos(){
+        return new ResponseEntity<>(clienteService.buscarTodos(), RequestStatus.SUCCESS, "Busca realizada com sucesso");
+    }
+
+    public ResponseEntity<Cliente> buscarPorId(Long id){
+        try {
+            return new ResponseEntity<>(clienteService.buscarPorId(id), RequestStatus.SUCCESS, "Busca realizada com sucesso");
+        } catch (ElementoNaoEncotradoException e) {
+            return new ResponseEntity<>(null, RequestStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
+    public ResponseEntity<Cliente> buscarPorDocumento(String documento){
+        try {
+            return new ResponseEntity<>(clienteService.buscarPorDocumento(documento), RequestStatus.SUCCESS, "Busca realizada com sucesso");
+        } catch (ElementoNaoEncotradoException e) {
+            return new ResponseEntity<>(null, RequestStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
+    public ResponseEntity<Cliente> atualizar(ClienteDTO clienteDTO){
+        ResponseEntity<Cliente> response = new ResponseEntity<>();
+        try {
+            response.setData(clienteService.atualizar(clienteDTO.toCliente()));
+            response.setStatus(RequestStatus.SUCCESS);
+            response.setMessage("Cliente atualizado com sucesso");
+            return response;
+        } catch (ElementoNaoEncotradoException e) {
+            response.setStatus(RequestStatus.NOT_FOUND);
+            response.setMessage(e.getMessage());
+            return response;
+        }
+    }
+
 }

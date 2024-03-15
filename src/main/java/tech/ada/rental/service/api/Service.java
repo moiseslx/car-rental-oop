@@ -9,7 +9,7 @@ import tech.ada.rental.service.exception.VeiculoIndisponivelException;
 public interface Service<T> {
     T criar(T t) throws ElementoNaoEncotradoException, ElementosDuplicadosException, VeiculoIndisponivelException;
 
-    T atualizar(T t);
+    T atualizar(T t) throws ElementoNaoEncotradoException;
 
     void deletar(Long id) throws ElementoNaoEncotradoException;
 
