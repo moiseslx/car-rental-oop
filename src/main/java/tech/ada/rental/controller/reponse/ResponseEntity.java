@@ -38,4 +38,7 @@ public class ResponseEntity<T>{
         this.status = status;
         this.message = message;
     }
+
+    public ResponseEntity() {
+    }
 }

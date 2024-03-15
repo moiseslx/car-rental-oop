@@ -2,12 +2,13 @@ package tech.ada.rental.service;
 
 import tech.ada.rental.model.Veiculo;
 import tech.ada.rental.repository.VeiculoRepository;
+import tech.ada.rental.service.api.Service;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.ElementosDuplicadosException;
 
 import java.util.List;
 
-public class VeiculoService {
+public class VeiculoService implements Service<Veiculo> {
     VeiculoRepository repository;
 
     public VeiculoService(VeiculoRepository repository) {
@@ -39,6 +40,12 @@ public class VeiculoService {
 
         throw new ElementoNaoEncotradoException("Veiculo nao encontrado");
     }
+
+    @Override
+    public Iterable<Veiculo> buscarTodos() {
+        return repository.findAll();
+    }
+
     public Veiculo atualizar(Veiculo veiculo) {
         return repository.save(veiculo);
     }

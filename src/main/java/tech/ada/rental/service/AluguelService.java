@@ -2,6 +2,7 @@ package tech.ada.rental.service;
 
 import tech.ada.rental.model.Aluguel;
 import tech.ada.rental.repository.AluguelRepository;
+import tech.ada.rental.service.api.Service;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.VeiculoIndisponivelException;
 
@@ -9,21 +10,53 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class AluguelService {
+public class AluguelService implements Service<Aluguel> {
 
     AluguelRepository repository;
+    ClienteService clienteService;
+    VeiculoService veiculoService;
 
-    public AluguelService(AluguelRepository repository) {
+    public AluguelService(AluguelRepository repository, ClienteService clienteService, VeiculoService veiculoService) {
         this.repository = repository;
+        this.clienteService = clienteService;
+        this.veiculoService = veiculoService;
     }
-
-    public Aluguel criarAluguel(Aluguel aluguel) throws VeiculoIndisponivelException {
-        if (aluguel.getVeiculo().isDisponibilidade()) {
-            aluguel.getVeiculo().setDisponibilidade(false);
-            return repository.save(aluguel);
+    @Override
+    public Aluguel criar(Aluguel aluguel) throws VeiculoIndisponivelException, ElementoNaoEncotradoException {
+        if(clienteService.buscarPorId(aluguel.getCliente().getId()) != null && veiculoService.buscarPorId(aluguel.getVeiculo().getId()) != null && aluguel.getVeiculo().isDisponibilidade()) {
+                aluguel.getVeiculo().setDisponibilidade(false);
+                return repository.save(aluguel);
         }
 
         throw new VeiculoIndisponivelException("Veiculo indisponível");
+    }
+
+    @Override
+    public Aluguel atualizar(Aluguel aluguel) {
+        return repository.save(aluguel);
+    }
+
+    @Override
+    public void deletar(Long id) throws ElementoNaoEncotradoException {
+        if (repository.findById(id) != null) {
+            repository.deleteById(id);
+        } else {
+            throw new ElementoNaoEncotradoException("Aluguel não encontrado");
+        }
+    }
+
+    @Override
+    public Aluguel buscarPorId(Long id) throws ElementoNaoEncotradoException {
+        if (repository.findById(id) != null) {
+            return repository.findById(id);
+        }
+
+        throw new ElementoNaoEncotradoException("Aluguel não encontrado");
+    }
+
+    @Override
+    public Iterable<Aluguel> buscarTodos() {
+        return repository.findAll();
     }
 
     public Aluguel devolverVeiculo(Aluguel aluguel) {
@@ -38,14 +71,6 @@ public class AluguelService {
         aluguel.setDiarias(obterDiarias(aluguel));
         aluguel.setPrecoAluguel(obterValorTotal(aluguel));
         return aluguel.getPrecoAluguel();
-    }
-
-    public Aluguel buscarPorId(long l) throws ElementoNaoEncotradoException {
-        if (repository.findById(l) != null) {
-            return repository.findById(l);
-        }
-
-        throw new ElementoNaoEncotradoException("Aluguel não encontrado");
     }
 
     private Long obterDiarias(Aluguel aluguel) {
