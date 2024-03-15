@@ -1,6 +1,7 @@
 package tech.ada.rental.service;
 
 import tech.ada.rental.model.Aluguel;
+import tech.ada.rental.model.Cliente;
 import tech.ada.rental.repository.AluguelRepository;
 import tech.ada.rental.service.api.Service;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
@@ -9,6 +10,8 @@ import tech.ada.rental.service.exception.VeiculoIndisponivelException;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AluguelService implements Service<Aluguel> {
 
@@ -55,8 +58,12 @@ public class AluguelService implements Service<Aluguel> {
     }
 
     @Override
-    public Iterable<Aluguel> buscarTodos() {
+    public List<Aluguel> buscarTodos() {
         return repository.findAll();
+    }
+
+    public List<Aluguel> buscarPorCliente (Cliente cliente) {
+        return repository.findAll().stream().filter(aluguel -> aluguel.getCliente().equals(cliente)).collect(Collectors.toList());
     }
 
     public Aluguel devolverVeiculo(Aluguel aluguel) {

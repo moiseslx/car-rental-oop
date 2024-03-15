@@ -22,8 +22,11 @@ public class VeiculoService implements Service<Veiculo> {
 
         throw new ElementosDuplicadosException("Ja existe um veículo com a placa informada");
     }
-    public List<Veiculo> buscarPorNome(String nomeparcial){
-        return repository.findByPartialName(nomeparcial);
+    public List<Veiculo> buscarPorNome(String nomeparcial) throws ElementoNaoEncotradoException {
+        if (repository.findByPartialName(nomeparcial) != null) {
+            return repository.findByPartialName(nomeparcial);
+        }
+        throw new ElementoNaoEncotradoException("Nenhum veiculo encontrado");
     }
     public Veiculo buscarPorPlaca(String placa) throws ElementoNaoEncotradoException {
         if (repository.findByPlaca(placa) != null) {
@@ -42,12 +45,19 @@ public class VeiculoService implements Service<Veiculo> {
     }
 
     @Override
-    public Iterable<Veiculo> buscarTodos() {
-        return repository.findAll();
+    public List<Veiculo> buscarTodos() throws ElementoNaoEncotradoException {
+        if (repository.findAll() != null){
+            return repository.findAll();
+        }
+        throw new ElementoNaoEncotradoException("Não há veiculos registrados");
     }
 
-    public Veiculo atualizar(Veiculo veiculo) {
-        return repository.save(veiculo);
+    public Veiculo atualizar(Veiculo veiculo) throws ElementoNaoEncotradoException {
+        if (repository.findById(veiculo.getId()) != null){
+            return repository.save(veiculo);
+        }
+        throw new ElementoNaoEncotradoException("Veiculo nao encontrado");
+
     }
 
     public void deletar(Long id) throws ElementoNaoEncotradoException {

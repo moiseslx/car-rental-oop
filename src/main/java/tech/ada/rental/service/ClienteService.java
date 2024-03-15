@@ -52,7 +52,7 @@ public class ClienteService implements Service<Cliente> {
     }
 
     @Override
-    public Iterable<Cliente> buscarTodos() {
+    public List<Cliente> buscarTodos() {
         return repository.findAll();
     }
 
