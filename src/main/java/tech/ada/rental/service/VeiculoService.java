@@ -45,7 +45,7 @@ public class VeiculoService implements Service<Veiculo> {
     }
 
     @Override
-    public Iterable<Veiculo> buscarTodos() throws ElementoNaoEncotradoException {
+    public List<Veiculo> buscarTodos() throws ElementoNaoEncotradoException {
         if (repository.findAll() != null){
             return repository.findAll();
         }

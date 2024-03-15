@@ -6,6 +6,8 @@ import tech.ada.rental.service.api.Service;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.ElementosDuplicadosException;
 
+import java.util.List;
+
 public class ClienteService implements Service<Cliente> {
 
     ClienteRepository repository;
@@ -42,7 +44,7 @@ public class ClienteService implements Service<Cliente> {
     }
 
     @Override
-    public Iterable<Cliente> buscarTodos() {
+    public List<Cliente> buscarTodos() {
         return repository.findAll();
     }
 }
