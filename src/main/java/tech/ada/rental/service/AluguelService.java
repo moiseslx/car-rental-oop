@@ -1,13 +1,15 @@
 package tech.ada.rental.service;
 
 import tech.ada.rental.model.Aluguel;
+import tech.ada.rental.model.Cliente;
 import tech.ada.rental.repository.AluguelRepository;
+import tech.ada.rental.service.api.Service;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class AluguelService {
+public class AluguelService implements Service<Cliente> {
 
     AluguelRepository repository;
 
@@ -15,14 +17,6 @@ public class AluguelService {
         this.repository = repository;
     }
 
-    public Aluguel criarAluguel(Aluguel aluguel) {
-        if (aluguel.getVeiculo().isDisponibilidade()) {
-            aluguel.getVeiculo().setDisponibilidade(false);
-            return repository.save(aluguel);
-        }
-
-        throw new RuntimeException("Veiculo indisponível");
-    }
 
     public Aluguel devolverVeiculo(Aluguel aluguel) {
         aluguel.getVeiculo().setDisponibilidade(true);
@@ -53,7 +47,23 @@ public class AluguelService {
         return valorTotal;
     }
 
-    public Aluguel buscarPorId(long l) {
-        return repository.findById(l);
+    @Override
+    public Aluguel criar(Aluguel aluguel) {
+        if (aluguel.getVeiculo().isDisponibilidade()) {
+            aluguel.getVeiculo().setDisponibilidade(false);
+            return repository.save(aluguel);
+        }
+
+        throw new RuntimeException("Veiculo indisponível");
+    }
+
+    @Override
+    public Object atualizar(Object o) {
+        return null;
+    }
+
+    @Override
+    public void deletar(Long id) {
+
     }
 }

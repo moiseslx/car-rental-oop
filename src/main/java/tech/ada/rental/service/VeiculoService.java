@@ -4,9 +4,11 @@ import org.jetbrains.annotations.NotNull;
 import tech.ada.rental.model.Veiculo;
 import tech.ada.rental.repository.VeiculoRepository;
 import tech.ada.rental.repository.impl.VeiculoRepositoryImpl;
+import tech.ada.rental.service.api.Service;
+
 import java.util.List;
 
-public class VeiculoService {
+public class VeiculoService implements Service<Veiculo> {
     VeiculoRepository repository = new VeiculoRepositoryImpl();
 
     public VeiculoService(VeiculoRepository repository) {

@@ -9,6 +9,7 @@ public class AluguelRepositoryImpl extends InMemoryRepository<Aluguel> implement
 
     @Override
     public Aluguel findByDataAluguel(LocalDateTime dataAluguel) {
+
         return null;
     }
 }
