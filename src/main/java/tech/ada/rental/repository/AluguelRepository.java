@@ -5,5 +5,4 @@ import java.time.LocalDateTime;
 
 public interface AluguelRepository extends Repository<Aluguel> {
 
-    public Aluguel findByDataAluguel(LocalDateTime dataAluguel);
 }
