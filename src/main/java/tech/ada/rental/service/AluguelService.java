@@ -1,5 +1,6 @@
 package tech.ada.rental.service;
 
+import tech.ada.rental.enums.AluguelStatus;
 import tech.ada.rental.model.Aluguel;
 import tech.ada.rental.model.Cliente;
 import tech.ada.rental.repository.AluguelRepository;
@@ -27,6 +28,7 @@ public class AluguelService implements Service<Aluguel> {
     @Override
     public Aluguel criar(Aluguel aluguel) throws VeiculoIndisponivelException, ElementoNaoEncotradoException {
         if(clienteService.buscarPorId(aluguel.getCliente().getId()) != null && veiculoService.buscarPorId(aluguel.getVeiculo().getId()) != null && aluguel.getVeiculo().isDisponibilidade()) {
+                aluguel.setStatus(AluguelStatus.EM_ANDAMENTO);
                 aluguel.getVeiculo().setDisponibilidade(false);
                 return repository.save(aluguel);
         }
@@ -70,6 +72,7 @@ public class AluguelService implements Service<Aluguel> {
         aluguel.getVeiculo().setDisponibilidade(true);
         aluguel.setDevolucao(LocalDateTime.now());
         aluguel.setPrecoAluguel(calcularAluguel(aluguel));
+        aluguel.setStatus(AluguelStatus.FINALIZADO);
         return repository.save(aluguel);
     }
 
