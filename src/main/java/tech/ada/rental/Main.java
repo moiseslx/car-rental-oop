@@ -1,7 +1,6 @@
 package tech.ada.rental;
 
 import tech.ada.rental.model.Aluguel;
-import tech.ada.rental.repository.AluguelRepository;
 import tech.ada.rental.repository.impl.AluguelRepositoryImpl;
 import tech.ada.rental.repository.impl.ClienteRepositoryImpl;
 import tech.ada.rental.repository.impl.VeiculoRepositoryImpl;

@@ -1,7 +1,5 @@
 package tech.ada.rental.service.api;
 
-import tech.ada.rental.model.Aluguel;
-import tech.ada.rental.model.Cliente;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.ElementosDuplicadosException;
 import tech.ada.rental.service.exception.VeiculoIndisponivelException;
