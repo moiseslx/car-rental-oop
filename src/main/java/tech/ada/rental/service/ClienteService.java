@@ -28,6 +28,7 @@ public class ClienteService implements Service<Cliente> {
     @Override
     public Cliente atualizar(Cliente cliente) throws ElementoNaoEncotradoException {
         if (repository.findByDocumento(cliente.getDocumento()) != null) {
+            cliente.setId(repository.findByDocumento(cliente.getDocumento()).getId());
             return repository.save(cliente);
         }
 

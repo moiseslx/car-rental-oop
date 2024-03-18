@@ -37,12 +37,6 @@ public class AluguelController {
             return response;
         }
 
-        if (!UserEntryValidator.validateDate(String.valueOf(aluguelDTO.inicioAluguel()))) {
-            response.setStatus(RequestStatus.BAD_REQUEST);
-            response.setMessage("A data de inicio do aluguel deve ser informada");
-            return response;
-        }
-
         try {
             response.setData(aluguelService.criar(aluguelDTO.toAluguel()));
             response.setStatus(RequestStatus.SUCCESS);
@@ -91,7 +85,7 @@ public class AluguelController {
             response.setMessage("Aluguel finalizado com sucesso");
             return response;
         } catch (DataInvalidaException e) {
-            response.setStatus(RequestStatus.NOT_FOUND);
+            response.setStatus(RequestStatus.BAD_REQUEST);
             response.setMessage(e.getMessage());
             return response;
         }

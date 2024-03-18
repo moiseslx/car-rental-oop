@@ -31,6 +31,12 @@ public class ClienteController {
             return response;
         }
 
+        if (!UserEntryValidator.validateEmail(clienteDTO.email())){
+            response.setStatus(RequestStatus.BAD_REQUEST);
+            response.setMessage("E-mail invalido");
+            return response;
+        }
+
         if (!UserEntryValidator.validarCNH(clienteDTO.cnh())){
             response.setStatus(RequestStatus.BAD_REQUEST);
             response.setMessage("CNH invalida");

@@ -70,7 +70,7 @@ public class Cliente  extends  IdBasedModel {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+        return "Cliente{" + "id=" + getId() +
                 "nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", telefone='" + telefone + '\'' +
