@@ -5,6 +5,7 @@ import tech.ada.rental.model.Aluguel;
 import tech.ada.rental.model.Cliente;
 import tech.ada.rental.repository.AluguelRepository;
 import tech.ada.rental.service.api.Service;
+import tech.ada.rental.service.exception.DataInvalidaException;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.VeiculoIndisponivelException;
 
@@ -68,13 +69,20 @@ public class AluguelService implements Service<Aluguel> {
         return repository.findAll().stream().filter(aluguel -> aluguel.getCliente().equals(cliente)).collect(Collectors.toList());
     }
 
-    public Aluguel devolverVeiculo(Aluguel aluguel) {
-        aluguel.getVeiculo().setDisponibilidade(true);
-        aluguel.setDevolucao(LocalDateTime.now());
-        aluguel.setPrecoAluguel(calcularAluguel(aluguel));
-        aluguel.setStatus(AluguelStatus.FINALIZADO);
-        return repository.save(aluguel);
+public Aluguel devolverVeiculo(Aluguel aluguel) throws DataInvalidaException {
+    LocalDateTime dataDeAluguel = aluguel.getInicioAluguel();
+    LocalDateTime dataDevolucao = LocalDateTime.now();
+
+    if (dataDevolucao.isBefore(dataDeAluguel)) {
+        throw new DataInvalidaException("Data de devolução não pode ser anterior à data de início do aluguel.");
     }
+
+    aluguel.getVeiculo().setDisponibilidade(true);
+    aluguel.setDevolucao(dataDevolucao);
+    aluguel.setPrecoAluguel(calcularAluguel(aluguel));
+    aluguel.setStatus(AluguelStatus.FINALIZADO);
+    return repository.save(aluguel);
+}
 
     private BigDecimal calcularAluguel(Aluguel aluguel) {
         aluguel.setDevolucao(LocalDateTime.now());
