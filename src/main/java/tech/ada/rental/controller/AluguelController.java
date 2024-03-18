@@ -7,6 +7,7 @@ import tech.ada.rental.enums.RequestStatus;
 import tech.ada.rental.model.Aluguel;
 import tech.ada.rental.model.Cliente;
 import tech.ada.rental.service.AluguelService;
+import tech.ada.rental.service.exception.DataInvalidaException;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.ElementosDuplicadosException;
 import tech.ada.rental.service.exception.VeiculoIndisponivelException;
@@ -84,9 +85,15 @@ public class AluguelController {
 
     public ResponseEntity<Aluguel> finalizarAluguel(Aluguel aluguel) {
         ResponseEntity<Aluguel> response = new ResponseEntity<>();
-        response.setData(aluguelService.devolverVeiculo(aluguel));
-        response.setStatus(RequestStatus.SUCCESS);
-        response.setMessage("Aluguel finalizado com sucesso");
-        return response;
+        try {
+            response.setData(aluguelService.devolverVeiculo(aluguel));
+            response.setStatus(RequestStatus.SUCCESS);
+            response.setMessage("Aluguel finalizado com sucesso");
+            return response;
+        } catch (DataInvalidaException e) {
+            response.setStatus(RequestStatus.NOT_FOUND);
+            response.setMessage(e.getMessage());
+            return response;
+        }
     }
 }
