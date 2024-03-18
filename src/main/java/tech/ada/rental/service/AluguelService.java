@@ -64,7 +64,10 @@ public class AluguelService implements Service<Aluguel> {
         return repository.findAll();
     }
 
-    public List<Aluguel> buscarPorCliente (Cliente cliente) {
+    public List<Aluguel> buscarPorCliente (Cliente cliente) throws ElementoNaoEncotradoException {
+        if (repository.findAll().stream().filter(aluguel -> aluguel.getCliente().equals(cliente)).collect(Collectors.toList()).isEmpty()) {
+            throw new ElementoNaoEncotradoException("Cliente não possui alugueis");
+        }
         return repository.findAll().stream().filter(aluguel -> aluguel.getCliente().equals(cliente)).collect(Collectors.toList());
     }
 
