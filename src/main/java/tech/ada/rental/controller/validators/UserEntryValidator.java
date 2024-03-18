@@ -56,7 +56,7 @@ public class UserEntryValidator {
     public static boolean validatePlaca(String placa) {
         Pattern pattern = Pattern.compile("^[A-Z]{3}-\\d{4}$");
         Matcher matcher = pattern.matcher(placa);
-        return matcher.matches();
+        return !matcher.matches();
     }
 
 }
