@@ -41,4 +41,13 @@ public class ResponseEntity<T>{
 
     public ResponseEntity() {
     }
+
+    @Override
+    public String toString() {
+        return "ResponseEntity{" +
+                "data=" + data +
+                ", status=" + status +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

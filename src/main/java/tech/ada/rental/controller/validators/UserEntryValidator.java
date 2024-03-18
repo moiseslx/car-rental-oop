@@ -7,15 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
 public class UserEntryValidator {
-    public static boolean validateDate(String data) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate.parse(data, formatter);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
+
     public static boolean validateDocumento(String documento) {
         if (documento == null || documento.isEmpty()) {
             return false;
@@ -53,10 +45,19 @@ public class UserEntryValidator {
         return pattern.matcher(nome).matches();
     }
 
+    public static boolean validateEmail(String email) {
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
+    }
+
     public static boolean validatePlaca(String placa) {
         Pattern pattern = Pattern.compile("^[A-Z]{3}-\\d{4}$");
         Matcher matcher = pattern.matcher(placa);
-        return !matcher.matches();
+        return matcher.matches();
     }
 
 }
