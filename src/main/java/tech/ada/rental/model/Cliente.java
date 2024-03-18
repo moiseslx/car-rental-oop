@@ -2,8 +2,6 @@ package tech.ada.rental.model;
 
 import tech.ada.rental.enums.TipoCliente;
 
-import java.util.Objects;
-
 public class Cliente  extends  IdBasedModel {
 
     private String nome;

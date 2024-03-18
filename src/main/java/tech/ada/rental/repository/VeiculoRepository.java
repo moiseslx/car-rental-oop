@@ -1,6 +1,5 @@
 package tech.ada.rental.repository;
 
-import tech.ada.rental.model.Cliente;
 import tech.ada.rental.model.Veiculo;
 
 import java.util.List;

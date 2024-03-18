@@ -1,10 +1,8 @@
 package tech.ada.rental.enums;
 
 import tech.ada.rental.model.Aluguel;
-import tech.ada.rental.model.Cliente;
 import tech.ada.rental.service.api.CalculoDesconto;
 import java.math.BigDecimal;
-import java.time.Duration;
 
 public enum TipoCliente implements CalculoDesconto {
 
