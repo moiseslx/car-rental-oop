@@ -2,13 +2,10 @@ package tech.ada.rental.controller;
 
 import tech.ada.rental.controller.reponse.ResponseEntity;
 import tech.ada.rental.controller.validators.UserEntryValidator;
-import tech.ada.rental.dto.ClienteDTO;
 import tech.ada.rental.dto.VeiculoDTO;
 import tech.ada.rental.enums.RequestStatus;
-import tech.ada.rental.model.Cliente;
 import tech.ada.rental.model.Veiculo;
 import tech.ada.rental.service.VeiculoService;
-import tech.ada.rental.service.api.Service;
 import tech.ada.rental.service.exception.ElementoNaoEncotradoException;
 import tech.ada.rental.service.exception.ElementosDuplicadosException;
 
