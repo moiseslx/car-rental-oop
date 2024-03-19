@@ -86,6 +86,14 @@ public class Main {
         // Tentando alugar carro alugado
         System.out.println(aluguelController.realizarAluguel(new AluguelDTO(clienteController.buscarPorId(3L).getData(), veiculoController.buscarPorId(3L).getData(), LocalDateTime.now().minusDays(4L))));
 
+        // FUNCIONALIDADES DE BUSCA
+        System.out.println(aluguelController.buscarPorId(0L).getMessage());
+        System.out.println(aluguelController.buscarPorId(1L).getData());
+        System.out.println(aluguelController.buscarPorId(2L).getMessage());
+        System.out.println(aluguelController.buscarPorId(03L));
+        System.out.println(aluguelController.buscarPorId(4L).getMessage());
+
+
         // DEVOLUÇÃO DE ALUGUEL
         aluguelController.finalizarAluguel(aluguelController.buscarPorId(0L).getData());
         System.out.println(aluguelController.buscarPorId(0l).getData().getPrecoAluguel());
